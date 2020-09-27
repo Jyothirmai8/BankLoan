@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Loan Form</title>
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      
+      <script>
+         $(document).ready(function() {
+            $("button").click(function() {
+            	
+            	alert("Button clicked"+document.getElementById("name").value);
+            	//var a = document.getElementById("name");
+               var homemodel = {
+                  name : document.getElementById("name").value,
+                  email : document.getElementById("email").value,
+                  address : document.getElementById("address").value,
+                  salary : document.getElementById("salary").value,
+                  tenure : document.getElementById("tenure").value,
+                  loanamount : document.getElementById("loanamount").value,
+                  loanpurpose : document.getElementById("loanpurpose").value,
+                  rateofinterest : document.getElementById("rateofinterest").value,
+                  panno : document.getElementById("panno").value,
+                  reqdocuments : document.getElementById("reqdocuments").value
+               };
+               var requestJSON = JSON.stringify(homemodel);
+               $.ajax({
+                  type : "POST",
+                  url : "http://localhost:10020/addHomeLoan",
+                  headers : {
+                     "Content-Type" : "application/json"
+                  },
+                  data : requestJSON,
+                  success : function(data) {
+                     alert("data="+data);
+                  },
+                  error : function(data) {
+                	  alert("error");
+                  }
+               });
+            });
+         });
+      </script>
+</head>
+<body bgcolor="red" >
+<h1 style="color:white"><pre>   Home Loan Online Application Form</pre></h1>
+<form style="color:white">
+<pre>         FullName    : <input type="text" id="name" name="name" /></input></pre>
+<pre>         Email       : <input type="text" id="email" name="email" /></pre> 
+<pre>         Address     : <input type="text" id="address" name="address" /></pre>
+<pre>         Salary      : <input type="text" id="salary" name="salary" /></pre>
+<pre>         Tenure      : <input type="text" id="tenure" name="tenure" /></pre>
+<pre>         LoanAmount  : <input type="text" id="loanamount" name="loanamount" /></pre>
+<pre>         LoanPurpose : <input type="text" id="loanpurpose" name="loanpurpose" /></pre>
+<pre>         InterestRate: <input type="text" id="rateofinterest" name="rateofinterest" /></pre>
+<pre>         PanNo       : <input type="text" id="panno" name="panno" /></pre>
+<pre>         Documents   : <input type="text" id="reqdocuments" name="reqdocuments" /></pre><br/>
+
+<pre>               <button>Submit</button></pre>
+</form>
+
+</body>
+</html>

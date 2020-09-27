@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title> Education Loan statement</title>
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      
+      <script>
+         $(document).ready(function() {
+            $("button").click(function() {
+            	
+            	//alert("Button clicked"+document.getElementById("id").value);
+            	//var a = document.getElementById("name");
+               
+                var admisionnum = document.getElementById("admisionnum").value;
+                  
+                var uri="http://localhost:10020/getEducationLoanData?admisionnum="+admisionnum;
+             //  var requestJSON = JSON.stringify(homemodel);
+               $.ajax({
+                  type : "GET",
+                  url : uri,
+                  headers : {
+                     "Content-Type" : "application/json"
+                  },
+                  data : "",
+                  //dataType: 'jsonp',
+                  success : function(res) {
+                	  console.log(res);
+                	  alert("data="+JSON.stringify(res));
+                	  
+                	 /* var $id = $('<h1>').text(res.id);
+                      var $address = $('<p>').text(res.address);
+                      $('#Details').append($id).append($address);*/
+                         
+                         
+                	  //var employee=JSON.parse(data);
+                     //alert("data="+employee);
+                     
+                     
+                  },
+                  error : function(res) {
+                	  alert("error"+res);
+                  }
+               });
+            });
+         });
+      </script>
+</head>
+<body bgcolor="red" >
+<h1 style="color:white"><pre>   Education Loan Online Application Form</pre></h1>
+<form style="color:white">
+<pre>         admisionnum    : <input type="text" id="admisionnum" name="admisionnum" /></input></pre>
+
+<pre>               <button>GetDetails</button></pre>
+					<div id="Details"> </div>
+</form>
+
+</body>
+</html>
